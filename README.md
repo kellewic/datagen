@@ -7,7 +7,7 @@ Generate data for testing.
 | --- | ---
 | [six](https://github.com/benjaminp/six) | Python 2 and 3 compatibility library
 
-The below items are only required to run unit testing and code coverage.
+The below items are only required to run unit testing and code coverage.  
 | | |
 | --- | ---
 | [pytest](https://github.com/pytest-dev/pytest/)   | Unit testing
