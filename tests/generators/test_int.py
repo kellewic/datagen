@@ -30,3 +30,10 @@ def test_range():
         i = g.generate()
         assert i >= minVal and i <= maxVal
 
+def test_init_no_args():
+    minVal = IntGenerator._minVal
+    maxVal = IntGenerator._maxVal
+    g = IntGenerator()
+    i = g.generate()
+    assert i >= minVal and i <= maxVal
+

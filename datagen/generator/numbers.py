@@ -10,9 +10,9 @@ class NumberGenerator(object):
     _floatLabel = "float"
 
     ## Determine int type based on Python version
-    if six.PY2:
+    if six.PY2: 
         intType = long
-    else:
+    else: # pragma: no cover
         intType = int
 
     ## Map of type strings to type
