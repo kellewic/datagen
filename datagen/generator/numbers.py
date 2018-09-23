@@ -1,5 +1,5 @@
 import six
-import random, sys
+import random
 
 ## Base class for numeric generators
 class NumberGenerator(object):
