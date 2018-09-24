@@ -19,10 +19,10 @@ def test_type_int():
 
 def test_return_val():
     g = IntGenerator(10)
-    assert isinstance(g.generate(), IntGenerator._acceptableTypes)
+    assert isinstance(g.generate(), g.getAcceptableArgs())
 
 def test_range():
-    minVal = IntGenerator._minVal
+    minVal = IntGenerator.getMinValue()
     maxVal = 1546
     g = IntGenerator(minVal, maxVal)
 
@@ -31,8 +31,8 @@ def test_range():
         assert i >= minVal and i <= maxVal
 
 def test_init_no_args():
-    minVal = IntGenerator._minVal
-    maxVal = IntGenerator._maxVal
+    minVal = IntGenerator.getMinValue()
+    maxVal = IntGenerator.getMaxValue()
     g = IntGenerator()
     i = g.generate()
     assert i >= minVal and i <= maxVal

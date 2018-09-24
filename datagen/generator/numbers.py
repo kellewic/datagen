@@ -1,34 +1,12 @@
 import six
 import random
 
+from .base import BaseGenerator
+
 ## Base class for numeric generators
-class NumberGenerator(object):
+class NumberGenerator(BaseGenerator):
     _minVal = -six.MAXSIZE - 1
     _maxVal = six.MAXSIZE
-
-    _intLabel = "int"
-    _floatLabel = "float"
-
-    ## Determine int type based on Python version
-    if six.PY2: 
-        intType = long
-    else: # pragma: no cover
-        intType = int
-
-    ## Map of type strings to type
-    _vt = {_intLabel: intType, _floatLabel: float}
-
-    ## Default types that can be processed
-    _acceptableTypes = six.integer_types + (float,)
-
-
-    ## Check that value is an acceptable type
-    def _checkValue(self, value):
-        if not isinstance(value, self.__class__._acceptableTypes):
-            raise TypeError("Expected one of {0}, but got {1} instead".format(str(self.__class__._acceptableTypes), type(value)))
-
-        return value
-
 
     ## Init object with min/max range
     def __init__(self, minVal=None, maxVal=None):
@@ -41,28 +19,31 @@ class NumberGenerator(object):
         self.minVal = self._checkValue(minVal)
         self.maxVal = self._checkValue(maxVal)
 
-    ## Generate number based on type using min.max range
-    def generate(self, typ):
-        vt = self._vt
+    @classmethod
+    def getMinValue(cls):
+        return cls._minVal
 
-        if typ not in vt:
-            raise KeyError("{0} is not a valid numeric type".format(typ))
+    @classmethod
+    def getMaxValue(cls):
+        return cls._maxVal
 
-        return vt[typ](random.uniform(self.minVal, self.maxVal))
+    ## Generate number using min/max range
+    def _gen_func(self):
+        def g():
+            return random.uniform(self.minVal, self.maxVal)
+        return g
 
 
 class IntGenerator(NumberGenerator):
-    ## Override types to only allow integers
-    _acceptableTypes = six.integer_types
+    _acceptableArgs = six.integer_types
+    _returnType = int
 
-    def generate(self):
-        return super(self.__class__, self).generate(typ=self.__class__._intLabel)
+    if six.PY2: # pragma: no cover
+        _returnType = long
 
 
 class FloatGenerator(NumberGenerator):
-    ## Use default types and allow integers so users don't have to pass arguments like 10.0
-
-    def generate(self):
-        return super(self.__class__, self).generate(typ=self.__class__._floatLabel)
-
+    ## Allow ints and floats as arguments to avoid having to pass numbers like 10.0
+    _acceptableArgs = six.integer_types + (float,)
+    _returnType = float
 

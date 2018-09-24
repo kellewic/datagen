@@ -1,6 +1,7 @@
 *.pyo
 *.pyc
 .coverage
+test.py
 TODO
 **/__pycache__
 htmlcov/

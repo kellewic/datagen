@@ -18,14 +18,14 @@ def test_type_float():
 
 def test_return_val1():
     g = FloatGenerator(10)
-    assert isinstance(g.generate(), FloatGenerator._acceptableTypes)
+    assert isinstance(g.generate(), g.getAcceptableArgs())
 
 def test_return_val2():
     g = FloatGenerator(10.55, 90089.5465)
-    assert isinstance(g.generate(), FloatGenerator._acceptableTypes)
+    assert isinstance(g.generate(), g.getAcceptableArgs())
 
 def test_range():
-    minVal = FloatGenerator._minVal
+    minVal = FloatGenerator.getMinValue()
     maxVal = 734567.9812
     g = FloatGenerator(minVal, maxVal)
 
