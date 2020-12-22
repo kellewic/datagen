@@ -7,7 +7,7 @@ except ImportError:
 
 
 def test_type_str():
-    with pytest.raises(TypeError, message="Expecting TypeError", match="Expected one of"):
+    with pytest.raises(TypeError, match="Expected one of"):
         FloatGenerator("10")
 
 def test_type_int():
