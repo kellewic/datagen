@@ -3,7 +3,7 @@ import six
 
 @six.add_metaclass(ABCMeta)
 class BaseGenerator(object):
-    ## Data types allowed as arguments to contructor
+    ## Data types allowed as arguments to constructor
     _acceptableArgs = ()
 
     ## Data type the generator returns
